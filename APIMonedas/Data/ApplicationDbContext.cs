@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using APIMonedas.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace APIMonedas.Models
+namespace WebService810.Data
 {
     public class ApplicationDbContext : DbContext
     {

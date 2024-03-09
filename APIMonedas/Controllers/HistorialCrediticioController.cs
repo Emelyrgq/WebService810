@@ -1,6 +1,6 @@
-﻿using APIMonedas.Models;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebService810.Data;
 
 namespace APIMonedas.Controllers
 {

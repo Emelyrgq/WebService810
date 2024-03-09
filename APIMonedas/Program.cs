@@ -1,8 +1,8 @@
-using APIMonedas.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using APIMonedas.Controllers;
+using WebService810.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
