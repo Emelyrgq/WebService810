@@ -32,7 +32,7 @@ namespace APIMonedas.Controllers
             }
 
             // Calcular la deuda total del cliente sumando los montos adeudados en el historial crediticio
-            decimal totalDebt = creditHistory.Sum(hc => hc.MontoAdeudado);
+            decimal monto_total = creditHistory.Sum(hc => hc.MontoAdeudado);
 
             // Construir la respuesta
             var response = new
@@ -40,9 +40,9 @@ namespace APIMonedas.Controllers
                 records = creditHistory.Select(hc => new
                 {
                     rnc = hc.RNCEmpresa,
-                    total_debt = hc.MontoAdeudado,
+                    monto_total = hc.MontoAdeudado,
                     date = hc.Fecha,
-                    reason = hc.ConceptoDeuda
+                    concepto_deuda = hc.ConceptoDeuda
                 })
             };
 

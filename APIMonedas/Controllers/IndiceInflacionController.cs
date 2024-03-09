@@ -52,15 +52,19 @@ namespace APIMonedas.Controllers
             return true;
         }
 
-        // Método para obtener el índice de inflación para el periodo especificado
         private decimal ObtenerIndiceInflacion(string periodo)
         {
-            // Implementa la lógica para obtener el índice de inflación para el periodo especificado
-            // Puedes consultar la base de datos u otro servicio para obtener el índice de inflación
-            // Devuelve un valor de ejemplo por ahora
-            Random random = new Random();
-            return random.Next(1, 1000) / 10.0m; // Genera un número aleatorio entre 1 y 999.9 como índice de inflación
+
+            var indiceInflacion = _context.IndicesInflacion.FirstOrDefault(i => i.Periodo == periodo);
+
+            if (indiceInflacion != null)
+            {
+                return indiceInflacion.Indice; // Devuelve el índice de inflación desde la base de datos
+            }
+            else
+            {
+                return -1; // Devuelve -1 si no se encontró el índice de inflación en la base de datos
+            }
         }
     }
 }
-

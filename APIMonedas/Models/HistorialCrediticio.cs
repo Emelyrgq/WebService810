@@ -23,7 +23,7 @@ namespace APIMonedas.Models
 
         [Required(ErrorMessage = "El campo MontoAdeudado es obligatorio.")]
         [Range(0, double.MaxValue, ErrorMessage = "El campo MontoAdeudado debe ser un número positivo.")]
-        public decimal MontoAdeudado { get;}
+        public decimal MontoAdeudado { get; set; }
 
     }
 }
