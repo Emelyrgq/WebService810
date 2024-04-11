@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Prometheus;
+using Swashbuckle.AspNetCore.Annotations;
+using Swashbuckle.Swagger.Annotations;
 using WebService810.Data;
+
 
 namespace APIMonedas.Controllers
 {
@@ -8,12 +12,22 @@ namespace APIMonedas.Controllers
     [ApiController]
     public class TasaCambioController : ControllerBase
     {
+
         private readonly ApplicationDbContext _context;
 
         public TasaCambioController(ApplicationDbContext context)
         {
             _context = context;
         }
+
+        /// <summary>
+        /// Obtiene la tasa de cambio de una moneda específica.
+        /// </summary>
+        /// <param name="moneda">Código ISO de moneda a consultar.(ej: DOP)</param>
+        /// <returns>La tasa de cambio de la moneda especificada.</returns>
+        /// <response code="200">Retorna el valor de la moneda.</response>
+        /// <response code="404">La moneda no está en el diccionario de la tasa de cambio.</response>
+        /// <response code="500">Error interno en el servidor.</response>
 
         [HttpGet("ConsultarTasaMoneda")]
         public IActionResult GetExchangeRate(string moneda)

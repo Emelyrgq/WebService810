@@ -17,5 +17,7 @@ namespace WebService810.Data
         public DbSet<SaludFinanciera> SaludFinanciera { get; set; }
 
         public DbSet<HistorialCrediticio> HistorialCrediticio { get; set; }
+
+        //public DbSet<WebServiceUsage> WebServiceUsage { get; set; }
     }
 }

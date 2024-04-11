@@ -4,6 +4,9 @@ using WebService810.Data;
 
 namespace APIMonedas.Controllers
 {
+    /// <summary>
+    /// Obtener historial crediticio
+    /// </summary>
     [Route("webservices")]
     [ApiController]
     public class HistorialCrediticioController : ControllerBase
@@ -14,6 +17,15 @@ namespace APIMonedas.Controllers
         {
             _context = context;
         }
+
+        /// <summary>
+        /// Obtener el historial crediticio del cliente.
+        /// </summary>
+        /// <param name="cedula">Digite la cédula a consultar.</param>
+        /// <returns>El .</returns>
+        /// <response code="200">Retorna el la información solicitada.</response>
+        /// <response code="404">La cédula no está en el diccionario de la tasa de cambio.</response>
+        /// <response code="500">Error interno en el servidor.</response>
 
         [HttpGet("HistorialCrediticio")]
         public IActionResult GetFinanceSummaryByClient(string cedula)

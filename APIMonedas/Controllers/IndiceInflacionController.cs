@@ -14,7 +14,14 @@ namespace APIMonedas.Controllers
         {
             _context = context;
         }
-
+        /// <summary>
+        /// Obtiene el indice de inflación del año y mes a consultar.
+        /// </summary>
+        /// <param name="periodo">año/mes YYYY/MM a consultar.</param>
+        /// <returns>El indice de inflación especificada.</returns>
+        /// <response code="200">Retorna el valor del indice de inflación.</response>
+        /// <response code="404">El año/mes no está en el diccionario del indice de inflación.</response>
+        /// <response code="500">Error interno en el servidor.</response>
         [HttpGet("ConsultarIndiceInflacion")]
         public IActionResult ConsultarIndiceInflacion(string periodo)
         {
