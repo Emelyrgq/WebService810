@@ -1,15 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using APIMonedas.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Prometheus;
 using Swashbuckle.AspNetCore.Annotations;
 using Swashbuckle.Swagger.Annotations;
 using WebService810.Data;
-
+using WebService810.Models;
 
 namespace APIMonedas.Controllers
 {
     [Route("webservices")]
     [ApiController]
+
     public class TasaCambioController : ControllerBase
     {
 
@@ -32,6 +34,7 @@ namespace APIMonedas.Controllers
         [HttpGet("ConsultarTasaMoneda")]
         public IActionResult GetExchangeRate(string moneda)
         {
+            DateTime fecha = DateTime.Now;
             // Consulta la base de datos para obtener la tasa de cambio correspondiente al código de moneda proporcionado
             var exchangeRate = _context.TasasCambio
                 .Where(t => t.Moneda == moneda)
@@ -44,6 +47,16 @@ namespace APIMonedas.Controllers
                 // Si no se encuentra, devolver un error 404 - Not Found
                 return NotFound("No se encontró la tasa de cambio para el código de moneda especificado.");
             }
+
+            var Historial = new WebServiceUsage
+            {
+                InvocationDate = fecha,
+                ServiceName = "Tasas de Cambio",
+                Content = moneda
+
+            };
+            _context.WebServiceUsage.Add(Historial);
+            _context.SaveChanges();
 
             // Si se encuentra la tasa de cambio, devolverla como respuesta
             return Ok(exchangeRate);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebService810.Data;
+using WebService810.Models;
 
 namespace APIMonedas.Controllers
 {
@@ -8,6 +9,8 @@ namespace APIMonedas.Controllers
     [ApiController]
     public class IndiceInflacionController : ControllerBase
     {
+        DateTime fecha = DateTime.Now;
+
         private readonly ApplicationDbContext _context;
 
         public IndiceInflacionController(ApplicationDbContext context)
@@ -38,6 +41,15 @@ namespace APIMonedas.Controllers
             {
                 return NotFound("No se encontró el índice de inflación para el periodo especificado.");
             }
+
+            var Historial = new WebServiceUsage
+            {
+                InvocationDate = fecha,
+                ServiceName = "Indice inflacion",
+                Content = periodo
+            };
+            _context.WebServiceUsage.Add(Historial);
+            _context.SaveChanges();
 
             // Devolver el índice de inflación como respuesta
             return Ok(new { IndiceInflacion = indiceInflacion.ToString("F2") + "%" });

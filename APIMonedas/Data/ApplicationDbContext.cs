@@ -1,5 +1,6 @@
 ﻿using APIMonedas.Models;
 using Microsoft.EntityFrameworkCore;
+using WebService810.Models;
 
 namespace WebService810.Data
 {
@@ -18,6 +19,6 @@ namespace WebService810.Data
 
         public DbSet<HistorialCrediticio> HistorialCrediticio { get; set; }
 
-        //public DbSet<WebServiceUsage> WebServiceUsage { get; set; }
+        public DbSet<WebServiceUsage> WebServiceUsage { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebService810.Data;
+using WebService810.Models;
 
 namespace APIMonedas.Controllers
 {
@@ -26,6 +27,8 @@ namespace APIMonedas.Controllers
         [HttpGet("ConsultarSaludFinanciera")]
         public IActionResult GetFinanceSummaryByClient(string cedula)
         {
+            DateTime fecha = DateTime.Now;
+
             if (string.IsNullOrEmpty(cedula))
             {
                 return BadRequest("Debe proporcionar el parámetro 'cedula'.");
@@ -55,8 +58,16 @@ namespace APIMonedas.Controllers
                     MontoTotal = monto_total,
 
                 })
-                
             };
+
+            var historial = new WebServiceUsage
+            {
+                InvocationDate = fecha,
+                ServiceName = "Salud financiera",
+                Content = cedula
+            };
+            _context.WebServiceUsage.Add(historial);
+            _context.SaveChanges();
 
             return Ok(response);
         }
